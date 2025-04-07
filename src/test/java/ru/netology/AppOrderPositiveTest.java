@@ -1,6 +1,5 @@
 package ru.netology;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,6 +10,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -18,12 +19,12 @@ public class AppOrderPositiveTest {
     private WebDriver driver;
 
         @BeforeAll
-        public static void setupAll() {
+        static void setupAll() {
             WebDriverManager.chromedriver().setup();
         }
 
         @BeforeEach
-        public void beforeEach() {
+        void setup() {
             ChromeOptions options = new ChromeOptions();
             options.addArguments("--disable-dev-shm-usage");
             options.addArguments("--no-sandbox");
@@ -33,13 +34,13 @@ public class AppOrderPositiveTest {
         }
 
         @AfterEach
-        public void afterEach() {
+        void tearDown() {
             driver.quit();
             driver = null;
         }
 
     @Test
-    public void shouldBeSuccessfulForm() {
+    void shouldBeSuccessfulForm() {
         driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Иванов Иван");
         driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79990000000");
         driver.findElement(By.cssSelector("[data-test-id=agreement]")).click();
